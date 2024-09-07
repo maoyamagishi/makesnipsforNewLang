@@ -1,0 +1,43 @@
+\documentclass{ltjsarticle}
+\usepackage{luatexja} % ltjclasses, ltjsclasses を使うときはこの行不要
+\usepackage{amsmath,amssymb}
+\usepackage{listings, xcolor}
+
+%%%%%%%%%%%%%%  本文  %%%%%%%%%%%%%%%%%%
+\begin{document} 
+\section{動機}
+VSCodeの拡張機能である、"HyperSnips"をインストールし、「動的スニペットは便利だなぁ」と感激していた。
+しかし、各言語ごとの動的スニペットが.hsnipsという独自の拡張子になっており、このファイルを編集するための
+コード補完に不満があった。（例えば、globalとendglobalがセットで出てこないなど）\par
+各言語ごと、拡張子ごとのスニペットはmanage>>snippetsを開いて選択するようになっており、独自言語やサポート
+されていない拡張子に対しては"言語名".jsonを上手く作成できない。\par
+今後もVSCodeがサポートしていない拡張子を持つファイルを快適に編集したいと思うことは想像に難くない。
+今回、上手くいく方法を見つけたので書き残しておきたい。
+
+\section{方法}
+HyperSnipsはJavaScriptと正規表現を用いて動的スニペットを可能にする拡張機能だ。\par
+そのため、フォルダの構成を見てみるとsrcや.vscodeなど見慣れたフォルダと同じ階層に
+package.jsonというファイルがある。これは自作のシンタックスハイライトやスニペットを
+作るときに必要なファイルで、language-configration.json、.tmLanguage.jsonといった言語の
+文法が記されたファイルへのパスと一緒にsnipet.jsonファイルのパスを書く。また、ファイパスの
+場所にsnipet.jsonファイルを作成しておく。\par
+正しく設定されていると、.hsnipsファイルのエディタからmanage>>snippetsでスニペットが選択できるようになる。
+
+
+
+%https://qiita.com/OrukRed/items/03f0e38e0f8553ee35d2
+
+\input{jsonContent.tex}
+%%%%%%%%%%%%% 参考文献 %%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{9}
+  \bibitem{syntaxes&snippet} 
+  %bibitemの後ろにプレーンテキストを書かない
+  vscodeで自作のシンタックスハイライト・スニペット拡張機能を作る\\
+  https://qiita.com/OrukRed/items/03f0e38e0f8553ee35d2
+
+  \bibitem{aboutsnippet}
+  VSCodeでスニペットを作成する\\
+  https://qiita.com/ygsiro/items/b8b9df4e55b51b844f82
+
+\end{thebibliography}
+\end{document}
